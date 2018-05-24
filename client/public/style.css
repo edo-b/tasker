@@ -1,0 +1,451 @@
+body {
+    font-family: 'Verdana', sans-serif;
+    line-height: 1.6;
+    font-size: 18px;
+    color: #404040;
+    background-color: #f7f7f7;
+
+    text-align: justify;
+    padding: 0;
+    margin: 0;
+}
+
+@media only screen and (max-width: 900px) { /* For too small screens display as fullsize blocks */
+    body{
+        text-align: left;
+    }
+}
+
+/*------------------------------------------------------------------ Side navbar ---------------------------------------------------------------------*/
+
+.sidenav {
+    height: 100%;
+    width: 55px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #282827;
+    overflow-x: hidden;
+    padding-top: 20px;
+    text-align: center;
+}
+
+.sidenav-link {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-decoration: none;
+    font-size: 22px;
+    color: #72726f;
+    display: block;
+}
+
+.sidenav-link:hover {
+    color: #f1f1f1;
+}
+
+.selected {
+    border-left: 4px solid #6492a3;
+}
+
+.profile-img {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 18px;
+    cursor: pointer;
+}
+
+/*------------------------------------------------------------------ Header ---------------------------------------------------------------------*/
+
+.page-header {
+    background-image: url("pattern.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 80px;
+    padding-top: 2px;
+    display:table;
+    width:100%;
+}
+
+.header-content {
+    padding:0;
+    vertical-align:middle;
+    display:table-cell;
+    color: #fff;
+}
+
+.header-content span {
+    margin-left: 5%;
+    font-size: 28px;
+}
+
+/*------------------------------------------------------------------ Page content ---------------------------------------------------------------------*/
+
+.main {
+    margin-left: 55px;
+}
+
+.page-content-wraper {
+    width:100%;
+}
+
+.page-content {
+    width:80%;
+    margin: 30px auto;
+}
+
+/*------------------------------------------------------------------ Footer ---------------------------------------------------------------------*/
+
+/*------------------------------------------------------------------ Profile popup ---------------------------------------------------------------------*/
+
+.hidden{
+    display: none;
+}
+
+.profile-actions {
+    position: fixed;
+    left: 70px;
+    top: 24px;
+    box-shadow: 0px 8px 20px 0px rgba(0,0,0,0.2);
+    border: 1px solid #E3E3E3;
+    border-radius: 5px;
+
+    background-color: #f9f9f9;
+    width:200px;
+    height:100px;
+}
+
+.profile-actions:before{
+    content: "";
+    position: absolute;
+    top: 5px;
+    left:-25px;
+    z-index: -1;
+    border: solid 15px transparent;
+    border-right-color: #f9f9f9;
+}
+
+.profile-actions-content {
+    width: 100%;
+    margin-top:5px;
+    height: 90%;
+    vertical-align: middle;
+}
+
+.profile-actions-link{
+    width:100%;
+    height: 50%;
+    display: block;
+    margin:0;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    color: #545454;
+}
+
+.profile-actions-link:hover{
+    background-color: #efefef;
+}
+
+.logout-link{
+    color: #6492a3 ;
+}
+
+/*------------------------------------------------------------------ Modal ---------------------------------------------------------------------*/
+
+.modal { /* This is actually page cover when modal is active */
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+
+    animation-name: fadein;
+    animation-duration: 0.5s;
+}
+
+.modal-content {
+	background-color: #f7f7f7;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%;
+
+    border-radius: 5px;
+
+    animation-name: zoom;
+    animation-duration: 0.5s;
+}
+
+.confirm-modal-content {
+    background-color: #f7f7f7;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+
+    border-radius: 5px;
+
+    animation-name: zoom;
+    animation-duration: 0.5s;
+}
+
+.close {
+    color: #ff6961;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #ff2015;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.prevent-scroll{
+    overflow: hidden;
+	margin-right: 17px;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+@keyframes fadein {
+    from { opacity:0; }
+    to { opacity:1; }
+}
+
+@media only screen and (max-width: 900px) { /* For too small screens display as fullsize blocks */
+    .confirm-modal-content{
+        width:60%;
+    }
+}
+
+/*------------------------------------------------------------------ Loader ---------------------------------------------------------------------*/
+
+.loader-wraper{
+    position: absolute;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #6492a3;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  top: 50%;
+  left:50%;
+  z-index: 1;
+  -webkit-animation: spin 1s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/*------------------------------------------------------------------ Buttons ---------------------------------------------------------------------*/
+
+.btn-round{
+    padding: 10px 15px;
+    font-size: 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    cursor: pointer;
+    
+    border: 2px solid transparent;
+    background-color: #555555;
+    color: #f7f7f7;
+
+    transition: background-color 0.35s ease,
+                color 0.35s ease,
+                border 0.35s ease;
+}
+
+.btn-round:hover{
+    border: 2px solid #555555;
+    color: #555555;
+    background-color: transparent;
+}
+
+.btn-round:focus{
+    outline: none;
+}
+
+.btn-blue{
+    background-color: #6492a3;
+    color: #f7f7f7;
+}
+
+.btn-blue:hover{
+    background-color: transparent;
+    color: #6492a3;
+    border: 2px solid #6492a3;
+}
+
+.btn-red{
+    background-color:#ad341d;
+    color:#f7f7f7;
+}
+
+.btn-red:hover{
+    background-color: transparent;
+    color: #ad341d;
+    border: 2px solid #ad341d;
+}
+
+
+.btn-add-circle{
+    background-color: #A3646A;
+    border: 2px solid transparent;
+    color: #f7f7f7;
+    box-shadow: 2px 2px 3px #999;
+
+    position: absolute;
+    border-radius: 50%;
+    width:50px;
+    height:50px;
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: background-color 0.35s ease,
+                color 0.35s ease,
+                border 0.35s ease;
+}
+
+.btn-add-circle:hover{
+    background-color: #A3647D;
+    border: 2px solid transparent;
+    box-shadow: 2px 2px 8px #999;
+}
+
+.btn-add-circle:focus{
+    outline: none;
+}
+
+/*------------------------------------------------------------------ Grid ---------------------------------------------------------------------*/
+
+.grid{
+    width:100%;
+    display:block;
+}
+
+.split-grid-left{
+    width:48%;
+    float:left;
+}
+
+.split-grid-right{
+    width:48%;
+    float:right;
+}
+
+@media only screen and (max-width: 900px) { /* For too small screens display as fullsize blocks */
+    .split-grid-left, .split-grid-right{
+        display: block;
+        width: 100%;
+    }
+}
+
+/*------------------------------------------------------------------ Cards ---------------------------------------------------------------------*/
+
+.card{
+    width: 100%;
+    border: 4px solid #e3e3e3;
+    border-radius: 10px;
+    margin-bottom: 30px;
+
+    background-color: #fbfbfb;
+}
+
+.card-content{
+    width: 80%;
+    margin: 40px auto;
+}
+
+/*------------------------------------------------------------------ Table ---------------------------------------------------------------------*/
+
+table{
+    width: 100%;
+    border: 1px solid #e3e3e3;
+    margin: 20px 0;
+    border-collapse: collapse;
+    overflow-x:auto;
+}
+
+th, td{
+    text-align: left;
+    padding: 8px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+}
+thead, tbody {
+    border-collapse: collapse;
+}
+thead{
+    /*border-bottom: 3px solid #6492a3;*/
+    background-image: url("pattern.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    color:#f7f7f7;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+.table-card-content{
+    padding:10px;
+}
+.actions-th{
+    text-align: center;
+}
+.actions-td{
+    text-align: center;
+    font-size: 22px; 
+}
+
+.edit-color{
+    color:#6492a3;
+}
+
+.delete-color{
+    color:#ad341d;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 520px) {
+    table{
+        width: 350px;
+    }
+}

@@ -87,10 +87,6 @@ body {
     margin-left: 55px;
 }
 
-.page-content-wraper {
-    width:100%;
-}
-
 .page-content {
     width:80%;
     margin: 30px auto;
@@ -448,4 +444,44 @@ tr:nth-child(even){background-color: #f2f2f2}
     table{
         width: 350px;
     }
+}
+
+/*--------------------------------------------------------------- Full page background -------------------------------------------------------------------*/
+
+.full-page-background {
+    width:100%;
+    min-height:100vh;
+    
+    background-image: url("pattern.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.full-page-centered-text {
+    margin: auto;
+    text-align: center;
+
+    color:#f8f8f8;
+}
+
+/*--------------------------------------------------------------- Page not found -------------------------------------------------------------------*/
+
+.not-found-card {
+    margin: auto;
+    padding: 50px;
+    color: #c7c7c7;
+    font-size:30px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    text-align: center;
+}
+
+.not-found-code {
+    font-size: 120px;
+    color: #a36492;
 }

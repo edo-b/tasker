@@ -22,10 +22,10 @@ class SideMenu extends Component {
     render(){
         return (
             <div className="sidenav">
-                <img src={this.state.profileImageUrl} alt="Profile image" className="profile-img" onClick={this.toggleLogoutMenu} />
-                <NavLink to="/" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-home"></i></NavLink>
+                <img src={this.state.profileImageUrl} alt="Profile" className="profile-img" onClick={this.toggleLogoutMenu} />
+                <NavLink to="/projects" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-home"></i></NavLink>
                 <NavLink to="/test" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-map-marker"></i></NavLink>
-                <NavLink to="/" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-calendar"></i></NavLink>
+                <NavLink to="/dummy" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-calendar"></i></NavLink>
 
                 <FloatingLogoutMenu isOpen={this.state.isLogoutMenuOpen} />
             </div>

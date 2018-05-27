@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 import PageHeader from '../components/PageHeader';
 
-class HomeCompoenent extends Component {
+class DummyCompoenent extends Component {
     render(){
         return (
-            <PageHeader title="Home page" />
+            <PageHeader title="Dummy page" />
         )
     }
 }
-export default HomeCompoenent;
+export default DummyCompoenent;

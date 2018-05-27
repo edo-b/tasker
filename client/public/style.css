@@ -153,7 +153,6 @@ body {
 /*------------------------------------------------------------------ Modal ---------------------------------------------------------------------*/
 
 .modal { /* This is actually page cover when modal is active */
-    display: none;
     position: fixed;
     z-index: 1;
     left: 0;
@@ -414,6 +413,15 @@ thead{
 
     color:#f7f7f7;
 }
+table.has-image img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+table.has-image td:first-child{
+    width: 50px;
+}
 
 tr:nth-child(even){background-color: #f2f2f2}
 
@@ -422,10 +430,12 @@ tr:nth-child(even){background-color: #f2f2f2}
 }
 .actions-th{
     text-align: center;
+    float: right;
 }
 .actions-td{
     text-align: center;
     font-size: 22px; 
+    float: right;
 }
 
 .edit-color{
@@ -438,12 +448,6 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 .pointer{
     cursor: pointer;
-}
-
-@media only screen and (max-width: 520px) {
-    table{
-        width: 350px;
-    }
 }
 
 /*--------------------------------------------------------------- Full page background -------------------------------------------------------------------*/
@@ -484,4 +488,32 @@ tr:nth-child(even){background-color: #f2f2f2}
 .not-found-code {
     font-size: 120px;
     color: #a36492;
+}
+
+/*--------------------------------------------------------------- Colors -------------------------------------------------------------------*/
+
+.project-color{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.yellow{
+    background-color: #fccf54;
+}
+
+.red{
+    background-color: #c42020;
+}
+
+.blue{
+    background-color: #5289c2;
+}
+
+.green{
+    background-color: #329966;
+}
+
+.orange{
+    background-color: #f99625;
 }

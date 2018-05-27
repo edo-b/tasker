@@ -5,7 +5,7 @@ import PageHeader from '../components/PageHeader';
 class TestCompoenent extends Component {
     render(){
         return (
-            <PageHeader title="Test page" />
+            <PageHeader title="Test component" />
         )
     }
 }

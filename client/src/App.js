@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import SideMenu from './containers/SideMenu';
-import ProjectsList from './containers/ProjectsList';
+
+import ProjectsContainer from './containers/ProjectsContainer';
 import TestComponent from './containers/TestComponent';
 import DummyComponent from './containers/DummyComponent';
+
 import PageNotFound from './components/PageNotFound';
 
 class App extends Component {
@@ -16,7 +18,7 @@ class App extends Component {
             <SideMenu />
             <Switch>
               <Route path="/" render={() => (<Redirect to="/projects" />)} exact />
-              <Route path="/projects" component={ProjectsList} exact />
+              <Route path="/projects" component={ProjectsContainer} exact />
               <Route path="/test" component={TestComponent} exact />
               <Route path="/dummy" component={DummyComponent} exact />
               <Route path="*" component={PageNotFound} />

@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 
-import { closeDeleteModal } from '../../actions/ProjectActions';
+import { closeDeleteModal, deleteProject } from '../../actions/ProjectActions';
 
 class DeleteModal extends Component {
+    handleDelete(){
+        closeDeleteModal();
+        deleteProject(this.props.project.id);
+    }
+    
     render(){
         return (
             <div className={["modal", this.props.show ? '' : 'hidden'].join(' ')}>
                 <div className="confirm-modal-content">
                     <span className="close" onClick={closeDeleteModal}>&times;</span>
-                    <h3>Confirm</h3>
-                    <p>Are you sure that you want to do something?</p>
+                    <h3>You are trying to delete project {this.props.project ? this.props.project.name : ''}</h3>
+                    <p>This action is permanent! Are you sure that you want to proceed?</p>
+                    <div>
+                        <button className="btn-round btn-red" onClick={this.handleDelete.bind(this)} >Confirm</button>&nbsp;
+                        <button className="btn-round" onClick={closeDeleteModal} >Cancel</button>
+                    </div>
                 </div>
             </div>
         )

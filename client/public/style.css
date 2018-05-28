@@ -305,14 +305,14 @@ body {
 }
 
 .btn-red{
-    background-color:#ad341d;
+    background-color:#DB3232;
     color:#f7f7f7;
 }
 
 .btn-red:hover{
     background-color: transparent;
-    color: #ad341d;
-    border: 2px solid #ad341d;
+    color: #DB3232;
+    border: 2px solid #DB3232;
 }
 
 

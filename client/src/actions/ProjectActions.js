@@ -1,7 +1,13 @@
 import dispatcher from '../dispatcher';
 
+// Later on handle api calls to server here
+
 export function createProject (name, color) {
     dispatcher.dispatch({type: 'CREATE_PROJECT', data:{name: name, color: color} });
+}
+
+export function deleteProject(id){
+    dispatcher.dispatch({type: 'DELETE_PROJECT', data: {id: id}});
 }
 
 export function showDeleteModal(project){

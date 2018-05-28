@@ -12,7 +12,8 @@ class ProjectsContainer extends Component {
         super();
         this.state = {
             projects: projectStore.getAllProjects(),
-            showDeleteModal: false
+            showDeleteModal: false,
+            selectedProjectForModal: undefined
         }
 
         this.getProjectsFromStore = this.getProjectsFromStore.bind(this);
@@ -36,11 +37,11 @@ class ProjectsContainer extends Component {
     }
 
     toggleDeleteModal(actionData){
-        this.setState({showDeleteModal: actionData.show});
+        this.setState({showDeleteModal: actionData.show, selectedProjectForModal: actionData.data});
     }
 
     handleClick(){
-        ProjectActions.showDeleteModal({test: "hello modal"});
+        
     }
 
     render(){
@@ -52,7 +53,7 @@ class ProjectsContainer extends Component {
                     <ProjectsList projects={this.state.projects} />
                 </div>
                 <button onClick={this.handleClick}>Simulate action</button>
-                <DeleteModal show={this.state.showDeleteModal} />
+                <DeleteModal show={this.state.showDeleteModal} project={this.state.selectedProjectForModal} />
             </div>
         );
     }

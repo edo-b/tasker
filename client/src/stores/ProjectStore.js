@@ -28,10 +28,18 @@ class ProjectStore extends EventEmitter{
         this.emit('change');
     }
 
+    deleteProject(id){
+        this.projects = this.projects.filter(it => {return it.id !== id});
+        this.emit("change");
+    }
+
     handleActions(action){
         switch(action.type){
             case 'CREATE_PROJECT':
                 this.createProject(action.data);
+                break;
+            case 'DELETE_PROJECT':
+                this.deleteProject(action.data.id);
                 break;
             case 'SHOW_DELETE_MODAL':
                 this.emit('toggleDeleteModal', {show: true, data: action.data});

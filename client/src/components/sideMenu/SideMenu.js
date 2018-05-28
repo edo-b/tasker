@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import FloatingLogoutMenu from '../components/FloatingLogoutMenu';
+import FloatingLogoutMenu from './FloatingLogoutMenu';
 
 class SideMenu extends Component {
     constructor(props){

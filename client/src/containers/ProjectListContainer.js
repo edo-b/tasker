@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import projectStore from '../stores/ProjectStore';
 import PageHeader from '../components/PageHeader';
-import ProjectsList from '../components/projects/ProjectsList';
-import DeleteModal from '../components/projects/DeleteModal';
+import ProjectsList from '../components/projectList/ProjectsList';
+import DeleteModal from '../components/projectList/DeleteModal';
 
 import * as ProjectActions from '../actions/ProjectActions';
 
-class ProjectsContainer extends Component {
+class ProjectListContainer extends Component {
     constructor(){
         super();
         this.state = {
@@ -59,4 +59,4 @@ class ProjectsContainer extends Component {
     }
 }
 
-export default ProjectsContainer;
+export default ProjectListContainer;

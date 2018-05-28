@@ -212,6 +212,10 @@ body {
 	margin-right: 17px;
 }
 
+.delete-project-name{
+    color:#DB3232;
+}
+
 @keyframes zoom {
     from {transform:scale(0)} 
     to {transform:scale(1)}

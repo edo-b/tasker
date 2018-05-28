@@ -15,9 +15,9 @@ class ProjectsListRow extends Component {
                     </td>
                     <td>{this.props.project.name}</td>
                     <td className="actions-td">
-                        <i className="fa fa-edit edit-color pointer"></i>
+                        <i className="fa fa-edit edit-color pointer" title='Edit'></i>
                         &nbsp;&nbsp;
-                        <i className="fa fa-times-circle delete-color pointer" onClick={this.handleDeleteClick.bind(this)}></i> 
+                        <i className="fa fa-times-circle delete-color pointer" title='Delete' onClick={this.handleDeleteClick.bind(this)}></i> 
                     </td>
                 </tr>
         );

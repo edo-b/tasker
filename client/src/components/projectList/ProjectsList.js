@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import ProjectsListRow from './ProjectsListRow';
 
 class ProjectsList extends Component {
-
-
+    
     renderProjectsList(){
         return this.props.projects.map(proj => {
             return (
@@ -25,6 +24,11 @@ class ProjectsList extends Component {
                 </thead>
                 <tbody>
                     {this.renderProjectsList()}
+                    <tr>
+                        <td colSpan="3" style={{textAlign:'center', height:'30px'}}>
+                            <button className="btn-add-circle" title='Create new project'><i className="fa fa-plus"></i></button>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         )

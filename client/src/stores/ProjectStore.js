@@ -28,6 +28,14 @@ class ProjectStore extends EventEmitter{
         this.emit('change');
     }
 
+    editProject(data){
+        let project = this.projects.find((element) => element.id === data.id);
+        if(project){
+            project.name = data.name;
+            project.color = data.color
+        }
+    }
+
     deleteProject(id){
         this.projects = this.projects.filter(it => {return it.id !== id});
         this.emit("change");
@@ -38,6 +46,9 @@ class ProjectStore extends EventEmitter{
             case 'CREATE_PROJECT':
                 this.createProject(action.data);
                 break;
+            case 'EDIT_PROJECT':
+                this.editProject(action.data);
+                break;
             case 'DELETE_PROJECT':
                 this.deleteProject(action.data.id);
                 break;
@@ -46,6 +57,12 @@ class ProjectStore extends EventEmitter{
                 break;
             case 'CLOSE_DELETE_MODAL':
                 this.emit('toggleDeleteModal', {show: false});
+                break;
+            case 'SHOW_EDIT_FORM_MODAL':
+                this.emit('toggleEditFormModal', {show: true, data: action.data});
+                break;
+            case 'CLOSE_EDIT_FORM_MODAL':
+                this.emit('toggleEditFormModal', {show: false});
                 break;
             default:
                 break;

@@ -349,6 +349,17 @@ body {
     outline: none;
 }
 
+/*------------------------------------------------------------------ Links ---------------------------------------------------------------------*/
+
+.blue-link{
+    text-decoration: none;
+    color: #466672;
+}
+
+.blue-link:hover{
+    color:#6492a3;
+}
+
 /*------------------------------------------------------------------ Grid ---------------------------------------------------------------------*/
 
 .grid{
@@ -493,6 +504,29 @@ tr:nth-child(even){background-color: #f2f2f2}
     font-size: 120px;
     color: #a36492;
 }
+/*--------------------------------------------------------------- Form -------------------------------------------------------------------*/
+
+.form-row {
+    width:100%;
+    margin: 30px auto;
+}
+
+.input-round {
+    padding: 5px 10px;
+    border: 1px solid #507482;
+    border-radius:25px;
+    line-height: 18px;
+    font-size: 16px;
+    margin:5px auto;
+
+    width: 250px;
+    max-width: 90%;
+}
+
+.input-round:focus {
+    outline: none;
+    border: 1px solid #96abb4;
+}
 
 /*--------------------------------------------------------------- Colors -------------------------------------------------------------------*/
 
@@ -520,4 +554,44 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 .orange{
     background-color: #f99625;
+}
+
+.color-option-outline {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 4px;
+    margin-right: 5px;
+    border: 1px solid transparent;
+}
+
+.color-option {
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+}
+
+.selected-color{
+    border: 1px solid #515151;
+}
+
+.color-option.yellow:hover{
+    background-color: #fdd872;
+}
+
+.color-option.red:hover{
+    background-color: #c53a3a;
+}
+
+.color-option.blue:hover{
+    background-color: #6191c5;
+}
+
+.color-option.green:hover{
+    background-color: #47b37d;
+}
+
+.color-option.orange:hover{
+    background-color: #f8a13d;
 }

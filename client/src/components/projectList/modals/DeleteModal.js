@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { closeDeleteModal, deleteProject } from '../../actions/ProjectActions';
+import { closeDeleteModal, deleteProject } from '../../../actions/ProjectActions';
 
 class DeleteModal extends Component {
     handleDelete(){

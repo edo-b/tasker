@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import projectStore from '../stores/ProjectStore';
 import PageHeader from '../components/PageHeader';
 import ProjectsList from '../components/projectList/ProjectsList';
-import DeleteModal from '../components/projectList/DeleteModal';
-
-import * as ProjectActions from '../actions/ProjectActions';
+import DeleteModal from '../components/projectList/modals/DeleteModal';
+import EditFormModal from '../components/projectList/modals/EditFormModal';
 
 class ProjectListContainer extends Component {
     constructor(){
@@ -13,21 +12,25 @@ class ProjectListContainer extends Component {
         this.state = {
             projects: projectStore.getAllProjects(),
             showDeleteModal: false,
+            showEditFormModal: false,
             selectedProjectForModal: undefined
         }
 
         this.getProjectsFromStore = this.getProjectsFromStore.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
+        this.toggleEditFormModal = this.toggleEditFormModal.bind(this);
     }
 
     componentWillMount(){
         projectStore.on('change', this.getProjectsFromStore);
         projectStore.on('toggleDeleteModal', this.toggleDeleteModal);
+        projectStore.on('toggleEditFormModal', this.toggleEditFormModal);
     }
 
     componentWillUnmount(){
         projectStore.removeListener('change', this.getProjectsFromStore);
         projectStore.removeListener('toggleDeleteModal', this.toggleDeleteModal);
+        projectStore.removeListener('toggleEditFormModal', this.toggleEditFormModal);
     }
 
     getProjectsFromStore(){
@@ -40,7 +43,11 @@ class ProjectListContainer extends Component {
         this.setState({showDeleteModal: actionData.show, selectedProjectForModal: actionData.data});
     }
 
-    handleClick(){
+    toggleEditFormModal(actionData){
+        this.setState({showEditFormModal: actionData.show, selectedProjectForModal: actionData.data});
+    }
+
+    handleAddProjectClick(){
         
     }
 
@@ -52,8 +59,8 @@ class ProjectListContainer extends Component {
                     <h2>Projects</h2>
                     <ProjectsList projects={this.state.projects} />
                 </div>
-                <button onClick={this.handleClick}>Simulate action</button>
                 <DeleteModal show={this.state.showDeleteModal} project={this.state.selectedProjectForModal} />
+                <EditFormModal show={this.state.showEditFormModal} project={this.state.selectedProjectForModal} />
             </div>
         );
     }

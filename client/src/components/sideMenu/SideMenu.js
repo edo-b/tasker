@@ -16,7 +16,6 @@ class SideMenu extends Component {
 
     toggleLogoutMenu(){
         this.setState({isLogoutMenuOpen: !this.state.isLogoutMenuOpen});
-        console.log(this.state.isLogoutMenuOpen);
     }
 
     render(){

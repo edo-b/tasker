@@ -18,6 +18,7 @@ class ProjectsList extends Component {
                 <thead>
                     <tr>
                         <th>Icon</th>
+                        <th className="empty-header-column"></th>
                         <th>Project name</th>
                         <th className="actions-th">Actions</th>
                     </tr>

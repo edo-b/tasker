@@ -98,7 +98,7 @@ body {
 /*------------------------------------------------------------------ Profile popup ---------------------------------------------------------------------*/
 
 .hidden{
-    display: none;
+    display: none !important;
 }
 
 .profile-actions {
@@ -336,12 +336,14 @@ body {
 
     transition: background-color 0.35s ease,
                 color 0.35s ease,
-                border 0.35s ease;
+                border 0.35s ease,
+                transform 0.35s ease;
 }
 
 .btn-add-circle:hover{
-    background-color: #A3647D;
-    border: 2px solid transparent;
+    /* background-color: #A3647D; */
+    background-color: #b58387;
+    transform: scale(1.1);
     box-shadow: 2px 2px 8px #999;
 }
 
@@ -534,6 +536,36 @@ tr:nth-child(even){background-color: #f2f2f2}
 .input-round:focus {
     outline: none;
     border: 1px solid #96abb4;
+}
+
+.warning-window{
+    background-color:#fff;
+    
+    position:fixed;
+    bottom:0;
+    right:0;
+    margin:50px;
+    
+    font-family: verdana;
+
+    animation-name: zoom;
+    animation-duration: 0.2s;
+}
+.warning-header{
+    display:inline;
+    
+    background-color:#ff5b5b;
+    color:white;
+    text-align:center;
+    
+    padding:10px 15px;
+}
+.warning-text{
+    display:inline;
+
+    background-color: #fff;
+    color:#4e4e4e;
+    padding:10px;
 }
 
 /*--------------------------------------------------------------- Colors -------------------------------------------------------------------*/

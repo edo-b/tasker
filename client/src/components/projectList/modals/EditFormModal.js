@@ -5,7 +5,11 @@ import { closeEditFormModal, editProject } from '../../../actions/ProjectActions
 class EditFormModal extends Component {
     constructor(props){
         super(props);
-        this.state = {project: this.props.project};
+        this.state = {
+            project: this.props.project,
+            displayErrorMessage: false,
+            errorMessage: 'Warning!'
+        };
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleColorChange = this.handleColorChange.bind(this);
     }
@@ -15,12 +19,21 @@ class EditFormModal extends Component {
             var newObj = JSON.parse(JSON.stringify(newProps.project)); // Making a clone object
             this.setState({project: newObj});
         }
+        this.setState({
+            displayErrorMessage: false,
+            errorMessage: 'Warning'
+        });
     }
 
     handleSubmit(e){
         e.preventDefault();
-        closeEditFormModal();
-        editProject(this.state.project);
+        if(this.state.project && this.state.project.name !== ''){
+            closeEditFormModal();
+            editProject(this.state.project);
+        }
+        else{
+            this.setState({displayErrorMessage: true, errorMessage: 'Name is required!'});
+        }
     }
 
     handleNameChange(e){
@@ -75,6 +88,14 @@ class EditFormModal extends Component {
                             <a className="btn-round" onClick={closeEditFormModal} >Cancel</a>
                         </div>
                     </form>
+                </div>
+                <div className={["warning-window", this.state.displayErrorMessage ? '' : 'hidden'].join(' ')}>
+                    <div className="warning-header">
+                        <i className="fa fa-times-circle"></i>
+                    </div>
+                    <div className="warning-text">
+                        {this.state.errorMessage}
+                    </div>
                 </div>
             </div>
         )

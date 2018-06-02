@@ -7,7 +7,9 @@ class CreateFormModal extends Component {
         super();
         this.state = {
                 name: '', 
-                color:'red'
+                color:'red',
+                displayErrorMessage: false,
+                errorMessage: 'Warning!'
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleNameChange = this.handleNameChange.bind(this);
@@ -15,13 +17,23 @@ class CreateFormModal extends Component {
     }
 
     componentWillReceiveProps(){
-        this.setState({name:'', color:'red'}); // To remove previous input values
+        this.setState({
+            name:'',
+            color:'red',
+            displayErrorMessage: false,
+            errorMessage: 'Warning'
+        }); // To remove previous input values
     }
 
     handleSubmit(e){
         e.preventDefault();
-        closeCreateFormModal();
-        createProject(this.state.name, this.state.color);
+        if(this.state.name === ''){
+            this.setState({displayErrorMessage: true, errorMessage: 'Name is required!'});
+        }
+        else{
+            closeCreateFormModal();
+            createProject(this.state.name, this.state.color);
+        }
     }
 
     handleNameChange(e){
@@ -72,6 +84,14 @@ class CreateFormModal extends Component {
                             <a className="btn-round" onClick={closeCreateFormModal} >Cancel</a>
                         </div>
                     </form>
+                </div>
+                <div className={["warning-window", this.state.displayErrorMessage ? '' : 'hidden'].join(' ')}>
+                    <div className="warning-header">
+                        <i className="fa fa-times-circle"></i>
+                    </div>
+                    <div className="warning-text">
+                        {this.state.errorMessage}
+                    </div>
                 </div>
             </div>
         )

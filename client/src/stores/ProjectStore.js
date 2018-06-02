@@ -6,6 +6,8 @@ class ProjectStore extends EventEmitter{
     constructor(){
         super();
 
+        //this.projects = [];
+
         this.projects = [
             {id: 1, name:"Learn React", color:"red"},
             {id: 2, name:"Tasker project", color:"blue"},

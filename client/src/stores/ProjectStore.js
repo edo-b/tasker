@@ -17,6 +17,7 @@ class ProjectStore extends EventEmitter{
 
         this.showDeleteModal = false;
         this.showEditModal = false;
+        this.showCreateModal = false;
     }
 
     getAllProjects(){
@@ -63,6 +64,12 @@ class ProjectStore extends EventEmitter{
                 break;
             case 'CLOSE_EDIT_FORM_MODAL':
                 this.emit('toggleEditFormModal', {show: false});
+                break;
+            case 'SHOW_CREATE_FORM_MODAL':
+                this.emit('toggleCreateFormModal', {show: true});
+                break;
+            case 'CLOSE_CREATE_FORM_MODAL':
+                this.emit('toggleCreateFormModal', {show: false});
                 break;
             default:
                 break;

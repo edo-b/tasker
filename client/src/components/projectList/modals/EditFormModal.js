@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { closeEditFormModal, editProject } from '../../../actions/ProjectActions';
-import Input from '../../shared/Input';
 
 class EditFormModal extends Component {
     constructor(props){
@@ -18,14 +17,15 @@ class EditFormModal extends Component {
         }
     }
 
-    handleSubmit(){
+    handleSubmit(e){
+        e.preventDefault();
         closeEditFormModal();
         editProject(this.state.project);
     }
 
-    handleNameChange(name){
+    handleNameChange(e){
         let newObj = this.state.project;
-        newObj.name = name;
+        newObj.name = e.target.value;
         this.setState({project:newObj});
     }
 
@@ -40,11 +40,11 @@ class EditFormModal extends Component {
             <div className={["modal", this.props.show ? '' : 'hidden'].join(' ')}>
                 <div className="confirm-modal-content">
                     <span className="close" onClick={closeEditFormModal}>&times;</span>
-                    <h3>{this.state.project ? 'Edit project ' + this.state.project.name : 'Create new project'}</h3>
-                    <form>
+                    <h2>{this.state.project ? 'Edit project ' + this.state.project.name : 'Create new project'}</h2>
+                    <form onSubmit={this.handleSubmit.bind(this)}>
                         <div className="form-row">
                             <label>Project name:</label>&nbsp;
-                            <Input type='text' value={this.state.project ? this.state.project.name : ''} onChange={this.handleNameChange} />
+                            <input type='text' className="input-round" value={this.state.project ? this.state.project.name : ''} onChange={this.handleNameChange} />
                         </div>
                         <div className="form-row">
                             Select color:
@@ -70,11 +70,11 @@ class EditFormModal extends Component {
                                 <div className="color-option orange"></div>
                             </div>
                         </div>
+                        <div className="form-row">
+                            <input type="submit" className="btn-round btn-blue" value="Submit" />&nbsp;
+                            <a className="btn-round" onClick={closeEditFormModal} >Cancel</a>
+                        </div>
                     </form>
-                    <div>
-                        <button className="btn-round btn-blue" onClick={this.handleSubmit.bind(this)} >Submit</button>&nbsp;
-                        <button className="btn-round" onClick={closeEditFormModal} >Cancel</button>
-                    </div>
                 </div>
             </div>
         )

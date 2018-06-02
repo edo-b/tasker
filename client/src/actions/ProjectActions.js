@@ -29,3 +29,11 @@ export function showEditFormModal(project){
 export function closeEditFormModal(){
     dispatcher.dispatch({type: 'CLOSE_EDIT_FORM_MODAL'});
 }
+
+export function showCreateFormModal(){
+    dispatcher.dispatch({type: 'SHOW_CREATE_FORM_MODAL'});
+}
+
+export function closeCreateFormModal(){
+    dispatcher.dispatch({type: 'CLOSE_CREATE_FORM_MODAL'});
+}

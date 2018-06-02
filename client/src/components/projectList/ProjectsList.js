@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import ProjectsListRow from './ProjectsListRow';
+import { showCreateFormModal } from './../../actions/ProjectActions';
 
 class ProjectsList extends Component {
     
@@ -27,7 +28,7 @@ class ProjectsList extends Component {
                     {this.renderProjectsList()}
                     <tr>
                         <td colSpan="3" style={{textAlign:'center', height:'30px'}}>
-                            <button className="btn-add-circle" title='Create new project'><i className="fa fa-plus"></i></button>
+                            <button className="btn-add-circle" title='Create new project' onClick={showCreateFormModal}><i className="fa fa-plus"></i></button>
                         </td>
                     </tr>
                 </tbody>

@@ -2,7 +2,7 @@ import EventEmitter from 'events';
 
 import dispatcher from '../dispatcher';
 
-class ProjectStore extends EventEmitter{
+class ProjectListStore extends EventEmitter{
     constructor(){
         super();
 
@@ -14,7 +14,7 @@ class ProjectStore extends EventEmitter{
             {id: 3, name:"School homework", color:"green"},
             {id: 4, name:"Write seminar", color:"yellow"},
             {id: 5, name:"Prepare for speach", color:"orange"},
-            {id: 6, name:"Dummy project", color:"blue"},
+            {id: 6, name:"Dummy project", color:"blue"}
         ];
 
         this.showDeleteModal = false;
@@ -79,6 +79,6 @@ class ProjectStore extends EventEmitter{
     }
 }
 
-const projectStore = new ProjectStore();
-dispatcher.register(projectStore.handleActions.bind(projectStore));
-export default projectStore;
+const projectListStore = new ProjectListStore();
+dispatcher.register(projectListStore.handleActions.bind(ProjectListStore));
+export default projectListStore;

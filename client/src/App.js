@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import ProjectListContainer from './containers/ProjectListContainer';
+import ProjectInstanceContainer from './containers/ProjectInstanceContainer';
 import TestComponent from './containers/TestComponent';
 import DummyComponent from './containers/DummyComponent';
 
@@ -20,6 +21,7 @@ class App extends Component {
             <Switch>
               <Route path="/" render={() => (<Redirect to="/projects" />)} exact />
               <Route path="/projects" component={ProjectListContainer} exact />
+              <Route path="/project/:id" component={ProjectInstanceContainer} exact />
               <Route path="/test" component={TestComponent} exact />
               <Route path="/dummy" component={DummyComponent} exact />
               <Route path="*" component={PageNotFound} />

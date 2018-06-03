@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import projectStore from '../stores/ProjectStore';
+import projectListStore from '../stores/ProjectListStore';
 import PageHeader from '../components/PageHeader';
 import ProjectsList from '../components/projectList/ProjectsList';
 import DeleteModal from '../components/projectList/modals/DeleteModal';
@@ -11,7 +11,7 @@ class ProjectListContainer extends Component {
     constructor(){
         super();
         this.state = {
-            projects: projectStore.getAllProjects(),
+            projects: projectListStore.getAllProjects(),
             showDeleteModal: false,
             showEditFormModal: false,
             showCreateFormModal: false,
@@ -25,22 +25,22 @@ class ProjectListContainer extends Component {
     }
 
     componentWillMount(){
-        projectStore.on('change', this.getProjectsFromStore);
-        projectStore.on('toggleDeleteModal', this.toggleDeleteModal);
-        projectStore.on('toggleEditFormModal', this.toggleEditFormModal);
-        projectStore.on('toggleCreateFormModal', this.toggleCreateFormModal);
+        projectListStore.on('change', this.getProjectsFromStore);
+        projectListStore.on('toggleDeleteModal', this.toggleDeleteModal);
+        projectListStore.on('toggleEditFormModal', this.toggleEditFormModal);
+        projectListStore.on('toggleCreateFormModal', this.toggleCreateFormModal);
     }
 
     componentWillUnmount(){
-        projectStore.removeListener('change', this.getProjectsFromStore);
-        projectStore.removeListener('toggleDeleteModal', this.toggleDeleteModal);
-        projectStore.removeListener('toggleEditFormModal', this.toggleEditFormModal);
-        projectStore.removeListener('toggleCreateFormModal', this.toggleCreateFormModal);
+        projectListStore.removeListener('change', this.getProjectsFromStore);
+        projectListStore.removeListener('toggleDeleteModal', this.toggleDeleteModal);
+        projectListStore.removeListener('toggleEditFormModal', this.toggleEditFormModal);
+        projectListStore.removeListener('toggleCreateFormModal', this.toggleCreateFormModal);
     }
 
     getProjectsFromStore(){
         this.setState({
-            projects: projectStore.getAllProjects()
+            projects: projectListStore.getAllProjects()
         });
     }
 

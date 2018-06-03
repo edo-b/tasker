@@ -93,6 +93,17 @@ body {
     margin: 30px auto;
 }
 
+@media only screen and (max-width: 900px) {
+    .page-content{
+        width: auto;
+        margin:10px;
+    }
+}
+
+.page-content-lg {
+    margin: 20px;
+}
+
 /*------------------------------------------------------------------ Footer ---------------------------------------------------------------------*/
 
 /*------------------------------------------------------------------ Profile popup ---------------------------------------------------------------------*/
@@ -229,7 +240,7 @@ body {
     to { opacity:1; }
 }
 
-@media only screen and (max-width: 900px) { /* For too small screens display as fullsize blocks */
+@media only screen and (max-width: 900px) {
     .confirm-modal-content{
         width:60%;
     }
@@ -398,8 +409,81 @@ body {
 }
 
 .card-content{
-    width: 80%;
-    margin: 40px auto;
+    margin: 40px;
+}
+
+/*------------------------------------------------------------------ Tasks ---------------------------------------------------------------------*/
+
+.task-column {
+    width:29%;
+    border-radius: 10px;
+    background-color: #e3e3e3;
+    padding:0px 8px 15px 8px;
+    float: left;
+    margin: 0 10px;
+}
+
+.task {
+    margin:0 10px 20px 10px;
+    padding: 5px;
+    background-color: #f7f7f7;
+    border-radius: 3px;
+
+    cursor: pointer;
+}
+
+.task-title {
+    color:#191919;
+}
+
+.task-title > .fa {
+    color: #9f9f9f;
+}
+
+.task-description {
+    color: #9f9f9f;
+    font-size: 16px;
+    margin-left: 5px;
+}
+
+.yellow-border{
+    border-left: 8px solid #fccf54;
+}
+
+.red-border{
+    border-left: 8px solid #c42020;
+}
+
+.blue-border{
+    border-left: 8px solid #5289c2;
+}
+
+.green-border{
+    border-left: 8px solid #329966;
+}
+
+.orange-border{
+    border-left: 8px solid #f99625;
+}
+
+@media only screen and (max-width: 925px) { /* For too small screens display as fullsize blocks */
+    .task-column{
+        width: 28%;
+    }
+}
+
+@media only screen and (max-width: 770px) { /* For too small screens display as fullsize blocks */
+    .task-column{
+        width: 27%;
+    }
+}
+
+@media only screen and (max-width: 665px) { /* For too small screens display as fullsize blocks */
+    .task-column{
+        display: block;
+        width: 90%;
+        margin:20px;
+    }
 }
 
 /*------------------------------------------------------------------ Table ---------------------------------------------------------------------*/

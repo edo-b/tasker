@@ -56,7 +56,8 @@ class EditFormModal extends Component {
                     <h2>{this.state.project ? 'Edit project ' + this.state.project.name : 'Create new project'}</h2>
                     <form onSubmit={this.handleSubmit.bind(this)}>
                         <div className="form-row">
-                            <label>Project name:</label>&nbsp;
+                            <label>Project name:</label>
+                            <br />
                             <input type='text' className="input-round" value={this.state.project ? this.state.project.name : ''} onChange={this.handleNameChange} />
                         </div>
                         <div className="form-row">

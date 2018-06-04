@@ -5,7 +5,6 @@ import dispatcher from '../dispatcher';
 class ProjectListStore extends EventEmitter{
     constructor(){
         super();
-
         //this.projects = [];
 
         this.projects = [
@@ -80,5 +79,5 @@ class ProjectListStore extends EventEmitter{
 }
 
 const projectListStore = new ProjectListStore();
-dispatcher.register(projectListStore.handleActions.bind(ProjectListStore));
+dispatcher.register(projectListStore.handleActions.bind(projectListStore));
 export default projectListStore;

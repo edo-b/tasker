@@ -52,7 +52,8 @@ class CreateFormModal extends Component {
                     <h2>Create new project</h2>
                     <form onSubmit={this.handleSubmit}>
                         <div className="form-row">
-                            <label>Project name:</label>&nbsp;
+                            <label>Project name:</label>
+                            <br />
                             <input type='text' className="input-round" value={this.state.name} onChange={this.handleNameChange} />
                         </div>
                         <div className="form-row">

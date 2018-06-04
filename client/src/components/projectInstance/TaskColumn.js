@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import Task from './Task';
+
 class TaskColumn extends Component {
     constructor(params){
         super(params);
@@ -25,11 +27,7 @@ class TaskColumn extends Component {
         if(this.props.tasks){
             return this.props.tasks.map((task) => {
                 return (
-                    <div key={task.id} className={["task", task.color + '-border'].join(' ')}>
-                        <span className="task-title">{task.title}</span>
-                        <br />
-                        <span className="task-description">{task.description}</span>
-                    </div>
+                    <Task key={task.id} task={task} />
                 );
             });
         }

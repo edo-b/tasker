@@ -436,8 +436,9 @@ body {
     color:#191919;
 }
 
-.task-title > .fa {
+.task-column .fa {
     color: #9f9f9f;
+    font-size: 16px;
 }
 
 .task-description {
@@ -464,6 +465,26 @@ body {
 
 .orange-border{
     border-left: 8px solid #f99625;
+}
+
+.yellow-modal-border{
+    border-left: 6px solid #fccf54;
+}
+
+.red-modal-border{
+    border-left: 6px solid #c42020;
+}
+
+.blue-modal-border{
+    border-left: 6px solid #5289c2;
+}
+
+.green-modal-border{
+    border-left: 6px solid #329966;
+}
+
+.orange-modal-border{
+    border-left: 6px solid #f99625;
 }
 
 @media only screen and (max-width: 925px) { /* For too small screens display as fullsize blocks */
@@ -602,7 +623,7 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 .form-row {
     width:100%;
-    margin: 30px auto;
+    margin: 10px auto;
 }
 
 .input-round {
@@ -613,8 +634,7 @@ tr:nth-child(even){background-color: #f2f2f2}
     font-size: 16px;
     margin:5px auto;
 
-    width: 250px;
-    max-width: 90%;
+    width: 95%;
 }
 
 .input-round:focus {
@@ -650,6 +670,10 @@ tr:nth-child(even){background-color: #f2f2f2}
     background-color: #fff;
     color:#4e4e4e;
     padding:10px;
+}
+
+textarea{
+    font-family: 'Verdana', sans-serif;
 }
 
 /*--------------------------------------------------------------- Colors -------------------------------------------------------------------*/

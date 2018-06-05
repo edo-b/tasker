@@ -12,8 +12,8 @@ export function deleteTask(task){
     dispatcher.dispatch({ type:"DELETE_TASK", data: task });
 }
 
-export function showCreateModal(task){
-    dispatcher.dispatch({ type:"SHOW_CREATE_MODAL" });
+export function showCreateModal(status){
+    dispatcher.dispatch({ type:"SHOW_CREATE_MODAL", data: status });
 }
 
 export function closeCreateModal(){

@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 
-import { closeEditModal, editTask } from '../../../actions/TaskActions';
+import { closeCreateModal, createTask } from '../../../actions/TaskActions';
 
-class EditFormModal extends Component {
+class CreateFormModal extends Component {
     constructor(props){
         super(props);
         this.state = {
-            task: this.props.task,
+            task: {
+                title:'',
+                description: '',
+                color: 'red',
+                status: this.props.status
+            },
+
             displayErrorMessage: false,
             errorMessage: 'Warning!'
         };
@@ -17,21 +23,24 @@ class EditFormModal extends Component {
     }
 
     componentWillReceiveProps(newProps){
-        if(newProps.task){
-            var newObj = JSON.parse(JSON.stringify(newProps.task)); // Making a clone object
-            this.setState({task: newObj});
-        }
         this.setState({
+            task: {
+                title:'',
+                description: '',
+                color: 'red',
+                status: newProps.status
+            },
+
             displayErrorMessage: false,
             errorMessage: 'Warning'
-        });
+        }); // To remove previous input values
     }
 
     handleSubmit(e){
         e.preventDefault();
         if(this.state.task && this.state.task.title !== ''){
-            closeEditModal();
-            editTask(this.state.task);
+            closeCreateModal();
+            createTask(this.state.task);
         }
         else{
             this.setState({displayErrorMessage: true, errorMessage: 'Name is required!'});
@@ -66,8 +75,8 @@ class EditFormModal extends Component {
         return (
             <div className={["modal", this.props.show ? '' : 'hidden'].join(' ')}>
                 <div className={["confirm-modal-content", this.state.task ? this.state.task.color + "-modal-border" : ''].join(' ')}>
-                    <span className="close" onClick={closeEditModal}>&times;</span>
-                    <h2>{this.state.task ? 'Edit task ' + this.state.task.title : ''}</h2>
+                    <span className="close" onClick={closeCreateModal}>&times;</span>
+                    <h2>{'Create task '}</h2>
                     <form onSubmit={this.handleSubmit.bind(this)}>
                         <div className="form-row">
                             <label>Task title:</label>
@@ -130,7 +139,7 @@ class EditFormModal extends Component {
                         
                         <div className="form-row">
                             <input type="submit" className="btn-round btn-blue" value="Submit" />&nbsp;
-                            <a className="btn-round" onClick={closeEditModal} >Cancel</a>
+                            <a className="btn-round" onClick={closeCreateModal} >Cancel</a>
                         </div>
                     </form>
                 </div>
@@ -146,4 +155,4 @@ class EditFormModal extends Component {
         );
     }
 }
-export default EditFormModal;
+export default CreateFormModal;;

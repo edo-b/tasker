@@ -1,28 +1,24 @@
 import EventEmitter from 'events';
 
 import dispatcher from '../dispatcher';
+import serverMockup from '../ServerMockup';
 
 class ProjectListStore extends EventEmitter{
     constructor(){
         super();
-        //this.projects = [];
-
-        this.projects = [
-            {id: 1, name:"Learn React", color:"red"},
-            {id: 2, name:"Tasker project", color:"blue"},
-            {id: 3, name:"School homework", color:"green"},
-            {id: 4, name:"Write seminar", color:"yellow"},
-            {id: 5, name:"Prepare for speach", color:"orange"},
-            {id: 6, name:"Dummy project", color:"blue"}
-        ];
 
         this.showDeleteModal = false;
         this.showEditModal = false;
         this.showCreateModal = false;
     }
 
-    getAllProjects(){
+    initStore(){
+        this.projects = serverMockup.getProjectList();
         return this.projects;
+    }
+
+    getAllProjects(){
+        return this.projects ? this.projects : [];
     }
 
     createProject(data){
@@ -39,6 +35,7 @@ class ProjectListStore extends EventEmitter{
     }
 
     deleteProject(id){
+        console.log("Delete project", id);
         this.projects = this.projects.filter(it => {return it.id !== id});
         this.emit("change");
     }

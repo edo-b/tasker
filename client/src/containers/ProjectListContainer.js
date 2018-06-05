@@ -11,7 +11,7 @@ class ProjectListContainer extends Component {
     constructor(){
         super();
         this.state = {
-            projects: projectListStore.getAllProjects(),
+            projects: projectListStore.initStore(),
             showDeleteModal: false,
             showEditFormModal: false,
             showCreateFormModal: false,

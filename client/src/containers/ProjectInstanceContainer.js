@@ -4,6 +4,7 @@ import projectInstanceStore from '../stores/ProjectInstanceStore';
 import PageHeader from '../components/PageHeader';
 import TaskColumn from '../components/projectInstance/TaskColumn';
 import EditFormModal from './../components/projectInstance/modals/EditFormModal';
+import CreateFormModal from './../components/projectInstance/modals/CreateFormModal';
 
 class ProjectInstanceContainer extends Component {
     constructor(params){
@@ -12,22 +13,24 @@ class ProjectInstanceContainer extends Component {
             project: projectInstanceStore.getProjectInstance(params.match.params.id),
             
             showEditModal: false,
-            selectedTaskForModal: undefined
+            selectedTaskForModal: undefined,
+            selectedTaskStatus: 'todo'
         };
 
         this.toggleEditFormModal = this.toggleEditFormModal.bind(this);
+        this.toggleCreateFormModal = this.toggleCreateFormModal.bind(this);
     }
 
     componentWillMount(){
-        //projectListStore.on('toggleDeleteModal', this.toggleDeleteModal);
+        //projectInstanceStore.on('toggleDeleteModal', this.toggleDeleteModal);
         projectInstanceStore.on('toggleEditModal', this.toggleEditFormModal);
-        //projectListStore.on('toggleCreateModal', this.toggleCreateFormModal);
+        projectInstanceStore.on('toggleCreateModal', this.toggleCreateFormModal);
     }
 
     componentWillUnmount(){
-        //projectListStore.removeListener('toggleDeleteModal', this.toggleDeleteModal);
+        //projectInstanceStore.removeListener('toggleDeleteModal', this.toggleDeleteModal);
         projectInstanceStore.removeListener('toggleEditModal', this.toggleEditFormModal);
-        //projectListStore.removeListener('toggleCreateModal', this.toggleCreateFormModal);
+        projectInstanceStore.removeListener('toggleCreateModal', this.toggleCreateFormModal);
     }
 
     // toggleDeleteModal(actionData){
@@ -38,9 +41,10 @@ class ProjectInstanceContainer extends Component {
         this.setState({showEditModal: actionData.show, selectedTaskForModal: actionData.data});
     }
 
-    // toggleCreateFormModal(actionData){
-    //     this.setState({showCreateModal: actionData.show});
-    // }
+    toggleCreateFormModal(actionData){
+        console.log("Sgiw create modal");
+        this.setState({showCreateModal: actionData.show, selectedTaskStatus: actionData.status});
+    }
 
     getTasksByStatus(status){
         if(this.state.project && this.state.project.tasks){
@@ -66,6 +70,7 @@ class ProjectInstanceContainer extends Component {
                         <TaskColumn status="Done" tasks={this.getTasksByStatus('done')} />
                     </div>
                     <EditFormModal show={this.state.showEditModal} task={this.state.selectedTaskForModal} />
+                    <CreateFormModal show={this.state.showCreateModal} status={this.state.selectedTaskStatus} />
                 </div>
             );
         }

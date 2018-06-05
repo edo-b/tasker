@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Task from './Task';
+import { showCreateModal } from './../../actions/TaskActions';
 
 class TaskColumn extends Component {
     constructor(params){
@@ -41,6 +42,11 @@ class TaskColumn extends Component {
             <div className="task-column">
                 <h3>{this.props.status} <i className={this.getTitleIcon()}></i></h3>
                 {this.renderTasks()}
+                <div className="center-text-margin">
+                    <button className="btn-add-circle" onClick={() => showCreateModal(this.props.status.toLowerCase())}>
+                        <i className="fa fa-plus"></i>
+                    </button>
+                </div>
             </div>
         );
     }

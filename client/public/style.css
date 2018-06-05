@@ -184,7 +184,7 @@ body {
 
 .modal-content {
 	background-color: #f7f7f7;
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 60%;
@@ -197,7 +197,7 @@ body {
 
 .confirm-modal-content {
     background-color: #f7f7f7;
-    margin: 15% auto;
+    margin: 5% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
@@ -361,6 +361,14 @@ body {
 .btn-add-circle:focus{
     outline: none;
 }
+.btn-add-circle fa{
+    color:#f7f7f7;
+}
+
+.center-text-margin{
+    text-align: center;
+    margin-right: 55px;
+}
 
 /*------------------------------------------------------------------ Links ---------------------------------------------------------------------*/
 
@@ -436,7 +444,7 @@ body {
     color:#191919;
 }
 
-.task-column .fa {
+.task-column > h3 > .fa {
     color: #9f9f9f;
     font-size: 16px;
 }
@@ -445,6 +453,23 @@ body {
     color: #9f9f9f;
     font-size: 16px;
     margin-left: 5px;
+}
+
+.status {
+    padding: 7px 12px;
+    background-color: #e3e3e3;
+    cursor: pointer;
+}
+.status:first-of-type{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+.status:last-of-type{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+.selected-status{
+    background-color: #b6b6b6;
 }
 
 .yellow-border{

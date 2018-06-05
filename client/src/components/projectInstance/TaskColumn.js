@@ -25,7 +25,7 @@ class TaskColumn extends Component {
     }
 
     renderTasks(){
-        if(this.props.tasks){
+        if(this.props.tasks && this.props.tasks.length > 0){
             return this.props.tasks.map((task) => {
                 return (
                     <Task key={task.id} task={task} />
@@ -33,7 +33,13 @@ class TaskColumn extends Component {
             });
         }
         else{
-            return <div>No tasks!</div>
+            return(
+                <div className="task">
+                    <span className="task-title">No tasks!</span>
+                    <br />
+                    <span className="task-description"><i className="fa fa-ban"></i></span>
+                </div>
+            );
         }
     }
 

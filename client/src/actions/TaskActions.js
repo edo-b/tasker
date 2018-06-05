@@ -8,8 +8,8 @@ export function editTask(task){
     dispatcher.dispatch({ type:"EDIT_TASK", data: task });
 }
 
-export function deleteTask(task){
-    dispatcher.dispatch({ type:"DELETE_TASK", data: task });
+export function deleteTask(id){
+    dispatcher.dispatch({ type:"DELETE_TASK", data: {id: id} });
 }
 
 export function showCreateModal(status){

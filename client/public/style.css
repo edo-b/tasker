@@ -436,8 +436,6 @@ body {
     padding: 5px;
     background-color: #f7f7f7;
     border-radius: 3px;
-
-    cursor: pointer;
 }
 
 .task-title {
@@ -453,6 +451,10 @@ body {
     color: #9f9f9f;
     font-size: 16px;
     margin-left: 5px;
+}
+
+.delete-task{
+    float: right;
 }
 
 .status {

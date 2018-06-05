@@ -26,7 +26,7 @@ class ProjectInstanceStore extends EventEmitter {
     }
 
     createTask(task){
-        if(this.project && this.project.tasks){
+        if(this.project){
             // Send new task on server (fire spinner)
             let newTask = {
                 id: Date.now(),
@@ -35,8 +35,13 @@ class ProjectInstanceStore extends EventEmitter {
                 description: task.description,
                 status: task.status
             }
+            if(!this.project.tasks) this.project.tasks = [];
             this.project.tasks.push(newTask);
         }
+    }
+
+    deleteTask(id){
+        this.project.tasks = this.project.tasks.filter(it => {return it.id !== id});
     }
     
     handleActions(action){
@@ -46,6 +51,15 @@ class ProjectInstanceStore extends EventEmitter {
                 break;
             case 'CREATE_TASK':
                 this.createTask(action.data);
+                break;
+            case 'DELETE_TASK':
+                this.deleteTask(action.data.id);
+                break;
+            case 'SHOW_DELETE_MODAL':
+                this.emit('toggleDeleteModal', {show: true, data: action.data});
+                break;
+            case 'CLOSE_DELETE_MODAL':
+                this.emit('toggleDeleteModal', {show: false});
                 break;
             case 'SHOW_EDIT_MODAL':
                 this.emit('toggleEditModal', {show: true, data: action.data});

@@ -1,7 +1,8 @@
 import EventEmitter from 'events';
+import axios from 'axios';
 
 import dispatcher from '../dispatcher';
-import serverMockup from '../ServerMockup';
+import { showSpinner, hideSpinner } from '../actions/UIActions';
 
 class ProjectListStore extends EventEmitter{
     constructor(){
@@ -13,8 +14,12 @@ class ProjectListStore extends EventEmitter{
     }
 
     initStore(){
-        this.projects = serverMockup.getProjectList();
-        return this.projects;
+        showSpinner()
+        axios.get('/project').then((response) => {
+            this.projects = response.data;
+            hideSpinner();
+            this.emit("change");
+        });
     }
 
     getAllProjects(){

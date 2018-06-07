@@ -11,12 +11,14 @@ class ProjectListContainer extends Component {
     constructor(){
         super();
         this.state = {
-            projects: projectListStore.initStore(),
+            projects: [],
             showDeleteModal: false,
             showEditFormModal: false,
             showCreateFormModal: false,
             selectedProjectForModal: undefined
         }
+
+        projectListStore.initStore();
 
         this.getProjectsFromStore = this.getProjectsFromStore.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);

@@ -15,7 +15,7 @@ class Task extends Component {
     render(){
         return(
             <div key={this.props.task.id} className={["task", "pointer", this.props.task.color + '-border'].join(' ')} onClick={this.handleClick.bind(this)}>
-                <span className="delete-task" onClick={this.handleDeleteClick.bind(this)}><i className="fa fa-times-circle"></i></span>
+                <span className="delete-task delete-color" onClick={this.handleDeleteClick.bind(this)}><i className="fa fa-times-circle"></i></span>
                 <span className="task-title">{this.props.task.title}</span>
                 <br />
                 <span className="task-description">{this.props.task.description}</span>

@@ -1,10 +1,35 @@
 import React, { Component } from 'react';
+import uiStore from '../stores/UIStore';
 
 class Spinner extends Component {
+
+    constructor(){
+        super();
+        this.state = { showSpinner: uiStore.showSpinner };
+
+        this.toggleSpinner = this.toggleSpinner.bind(this);
+    }
+
+    componentWillMount(){
+        uiStore.on("change", this.toggleSpinner);
+    }
+    componentWillUnmount(){
+        uiStore.removeListener("change", this.toggleSpinner);
+    }
+
+    toggleSpinner(show){
+        this.setState({showSpinner: show});
+    }
+    
     render(){
-        return(
-            <div className="spinner"></div>
-        )
+        if(this.state.showSpinner){
+            return(
+                <div className="spinner"></div>
+            )
+        }
+        else {
+            return null;
+        }
     }
 }
 

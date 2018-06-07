@@ -1,15 +1,29 @@
 import EventEmitter from 'events';
+import axios from 'axios';
 
 import dispatcher from '../dispatcher';
-import serverMockup from '../ServerMockup';
+import { showSpinner, hideSpinner } from '../actions/UIActions';
 
 class ProjectInstanceStore extends EventEmitter {
-    getProjectInstance(id){
+    initStore(id){
         if(id){
-            // Do a server call (also start spinner)
-            this.project = serverMockup.getProjectInstance(id);
-            return this.project;
+            showSpinner();
+            axios.get(`project/${id}`)
+            .then(response => {
+                this.project = response.data;
+                hideSpinner();
+                this.emit("change");
+
+                console.log("Got data from server!");
+            })
+            .catch(err => {
+                console.log("Error", err.response);
+            })
         }
+    }
+
+    getProjectInstance(){
+        return this.project ? this.project : {};
     }
 
     editTask(task){

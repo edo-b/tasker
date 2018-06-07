@@ -11,7 +11,7 @@ class ProjectInstanceContainer extends Component {
     constructor(params){
         super(params);
         this.state = { 
-            project: projectInstanceStore.getProjectInstance(params.match.params.id),
+            project: { name: "Loading..." },
             
             showDeleteModal: false,
             showEditModal: false,
@@ -20,21 +20,32 @@ class ProjectInstanceContainer extends Component {
             selectedTaskStatus: 'todo'
         };
 
+        projectInstanceStore.initStore(params.match.params.id)
+
+        this.getProjectInstanceFromStore = this.getProjectInstanceFromStore.bind(this);
         this.toggleEditFormModal = this.toggleEditFormModal.bind(this);
         this.toggleCreateFormModal = this.toggleCreateFormModal.bind(this);
         this.toggleDeleteModal = this.toggleDeleteModal.bind(this);
     }
 
     componentWillMount(){
+        projectInstanceStore.on('change', this.getProjectInstanceFromStore);
         projectInstanceStore.on('toggleDeleteModal', this.toggleDeleteModal);
         projectInstanceStore.on('toggleEditModal', this.toggleEditFormModal);
         projectInstanceStore.on('toggleCreateModal', this.toggleCreateFormModal);
     }
 
     componentWillUnmount(){
+        projectInstanceStore.removeListener('change', this.getProjectInstanceFromStore);
         projectInstanceStore.removeListener('toggleDeleteModal', this.toggleDeleteModal);
         projectInstanceStore.removeListener('toggleEditModal', this.toggleEditFormModal);
         projectInstanceStore.removeListener('toggleCreateModal', this.toggleCreateFormModal);
+    }
+
+    getProjectInstanceFromStore(){
+        this.setState({
+            project: projectInstanceStore.getProjectInstance()
+        });
     }
 
     toggleDeleteModal(actionData){

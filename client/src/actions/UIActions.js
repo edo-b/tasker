@@ -7,3 +7,7 @@ export function showSpinner(){
 export function hideSpinner(){
     dispatcher.dispatch({ type: "HIDE_SPINNER" });
 }
+
+export function showFeedbackMessage(color, message){
+    dispatcher.dispatch({ type: "SHOW_FEEDBACK_MESSAGE", data: { show:true, color: color, message: message } });
+}

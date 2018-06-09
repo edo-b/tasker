@@ -11,10 +11,10 @@ class Spinner extends Component {
     }
 
     componentWillMount(){
-        uiStore.on("change", this.toggleSpinner);
+        uiStore.on("changeSpinner", this.toggleSpinner);
     }
     componentWillUnmount(){
-        uiStore.removeListener("change", this.toggleSpinner);
+        uiStore.removeListener("changeSpinner", this.toggleSpinner);
     }
 
     toggleSpinner(show){

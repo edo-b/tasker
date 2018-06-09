@@ -673,6 +673,7 @@ tr:nth-child(even){background-color: #f2f2f2}
     background-color:#fff;
     
     position:fixed;
+    z-index: 1;
     bottom:0;
     right:0;
     margin:50px;
@@ -697,6 +698,12 @@ tr:nth-child(even){background-color: #f2f2f2}
     background-color: #fff;
     color:#4e4e4e;
     padding:10px;
+}
+
+@media only screen and (max-width: 415px) {
+    .warning-header, .warning-text{
+        display: block;
+    }
 }
 
 textarea{

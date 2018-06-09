@@ -9,6 +9,7 @@ import DummyComponent from './containers/DummyComponent';
 import SideMenu from './components/sideMenu/SideMenu';
 import PageNotFound from './components/PageNotFound';
 import Spinner from './components/Spinner';
+import FeedbackMessage from './components/FeedbackMessage';
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
           <div className="main">
             <SideMenu />
             <Spinner />
+            <FeedbackMessage />
             <Switch>
               <Route path="/" render={() => (<Redirect to="/projects" />)} exact />
               <Route path="/projects" component={ProjectListContainer} exact />

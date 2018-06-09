@@ -2,7 +2,7 @@ import EventEmitter from 'events';
 import axios from 'axios';
 
 import dispatcher from '../dispatcher';
-import { showSpinner, hideSpinner } from '../actions/UIActions';
+import { showSpinner, hideSpinner, showFeedbackMessage } from '../actions/UIActions';
 
 class ProjectInstanceStore extends EventEmitter {
     initStore(id){
@@ -14,10 +14,12 @@ class ProjectInstanceStore extends EventEmitter {
                 hideSpinner();
                 this.emit("change");
 
-                console.log("Got data from server!");
+                console.log("Got data from server!", response);
             })
             .catch(err => {
-                console.log("Error", err.response);
+                hideSpinner();
+                if(err.response.status == 404)
+                    showFeedbackMessage("orange", "Project instance not found!");
             })
         }
     }

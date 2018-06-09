@@ -6,10 +6,13 @@ class UIStore extends EventEmitter {
     handleActions(action){
         switch(action.type){
             case "SHOW_SPINNER":
-                this.emit("change", true);
+                this.emit("changeSpinner", true);
                 break;
             case "HIDE_SPINNER":
-                this.emit("change", false);
+                this.emit("changeSpinner", false);
+                break;
+            case "SHOW_FEEDBACK_MESSAGE":
+                this.emit("changeFeedback", { data: action.data });
                 break;
         }
     }

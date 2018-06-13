@@ -1,9 +1,27 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Task = sequelize.define('Task', {
-    title: DataTypes.STRING,
-    color: DataTypes.STRING,
-    status: DataTypes.STRING
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+
+    color: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "red",
+      values: ['red', 'green', 'yellow', 'orange', 'blue']
+    },
+    
+    status:{
+      type: DataTypes.STRING,
+      allowNull: false,
+      defaultValue: "todo",
+      values: ['todo', 'doing', 'done']
+    }
+  }, {
+    timestamps: false,
+    freezeTableName: true,
   });
 
   Task.associate = function (models) {

@@ -26,7 +26,7 @@ class FeedbackMessage extends Component {
     handleMessageChange(actionData){
         if(actionData.data){
             this.setState({show: actionData.data.show, color: actionData.data.color, message: actionData.data.message});
-            //setTimeout(() => this.setState({show: false}), 5000);
+            setTimeout(() => this.setState({show: false}), 5000);
         }
     }
 

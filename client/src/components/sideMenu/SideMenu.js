@@ -7,7 +7,7 @@ class SideMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            profileImageUrl: "https://www.w3schools.com/howto/img_avatar.png",
+            profileImageUrl: "img_avatar.png",
             isLogoutMenuOpen: false
         };
 

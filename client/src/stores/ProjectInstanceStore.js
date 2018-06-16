@@ -13,8 +13,6 @@ class ProjectInstanceStore extends EventEmitter {
                 this.project = response.data;
                 hideSpinner();
                 this.emit("change");
-
-                console.log("Got data from server!", response);
             })
             .catch(err => {
                 hideSpinner();

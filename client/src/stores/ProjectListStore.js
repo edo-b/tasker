@@ -2,7 +2,7 @@ import EventEmitter from 'events';
 import axios from 'axios';
 
 import dispatcher from '../dispatcher';
-import { showSpinner, hideSpinner } from '../actions/UIActions';
+import { showSpinner, hideSpinner, showFeedbackMessage } from '../actions/UIActions';
 
 class ProjectListStore extends EventEmitter{
     constructor(){
@@ -19,6 +19,10 @@ class ProjectListStore extends EventEmitter{
             this.projects = response.data;
             hideSpinner();
             this.emit("change");
+        })
+        .catch(err =>{
+            showFeedbackMessage('red', 'An error occured');
+            hideSpinner();
         });
     }
 
@@ -27,7 +31,7 @@ class ProjectListStore extends EventEmitter{
     }
 
     createProject(data){
-        this.projects.push({id: Date.now(), name: data.name, color: data.color});
+        this.projects.push({id: data.id, name: data.name, color: data.color});
         this.emit('change');
     }
 
@@ -36,6 +40,7 @@ class ProjectListStore extends EventEmitter{
         if(project){
             project.name = data.name;
             project.color = data.color
+            this.emit("change");
         }
     }
 

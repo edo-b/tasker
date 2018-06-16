@@ -27,7 +27,7 @@ class CreateFormModal extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        if(this.state.name === ''){
+        if(!this.state.name || this.state.name.trim() === ''){
             this.setState({displayErrorMessage: true, errorMessage: 'Name is required!'});
         }
         else{

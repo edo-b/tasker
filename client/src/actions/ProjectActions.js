@@ -1,13 +1,58 @@
+import axios from 'axios';
+
 import dispatcher from '../dispatcher';
+import { showSpinner, hideSpinner, showFeedbackMessage } from '../actions/UIActions';
 
 // Later on handle api calls to server here
 
 export function createProject (name, color) {
-    dispatcher.dispatch({type: 'CREATE_PROJECT', data:{name: name, color: color} });
+    showSpinner();
+    axios.post('project', { name: name, color: color })
+        .then(response => {
+            if(response.data.status === 0 && response.data.project){
+                dispatcher.dispatch({type: 'CREATE_PROJECT', data: response.data.project });
+                showFeedbackMessage(0, 'Project successfully saved');
+                hideSpinner();
+            }
+        })
+        .catch(err => {
+            if(err.response.status == 400){
+                const errorMessage = err.response.data.errors.map(error => error.msg).join(' ');
+                showFeedbackMessage('orange', errorMessage);
+                hideSpinner();
+            }
+            else{
+                showFeedbackMessage('red', 'An error occured!');
+                hideSpinner();
+            }
+        });
 }
 
 export function editProject (project) {
-    dispatcher.dispatch({type: 'EDIT_PROJECT', data:project });
+    showSpinner();
+    axios.put(`project/${project.id}`, { name: project.name, color: project.color })
+        .then(response => {
+            if(response.data.status === 0 && response.data.project){
+                dispatcher.dispatch({type: 'EDIT_PROJECT', data: response.data.project });
+                showFeedbackMessage(0, 'Project successfully saved');
+                hideSpinner();
+            }
+        })
+        .catch(err => {
+            if(err.response.status === 400){
+                const errorMessage = err.response.data.errors.map(error => error.msg).join(' ');
+                showFeedbackMessage('orange', errorMessage);
+                hideSpinner();
+            }
+            else if(err.response.status === 404){
+                showFeedbackMessage('orange', 'Project not found');
+                hideSpinner();
+            }
+            else{
+                showFeedbackMessage('red', 'An error occured!');
+                hideSpinner();
+            }
+        });
 }
 
 export function deleteProject(id){
@@ -37,3 +82,20 @@ export function showCreateFormModal(){
 export function closeCreateFormModal(){
     dispatcher.dispatch({type: 'CLOSE_CREATE_FORM_MODAL'});
 }
+
+const testApi = () => {
+    axios.post('project', { name:"Test", color:"orange" })
+        .then(response => {
+            if(response.data.status === 0 && response.data.project)
+            console.log("Project created", response.data.project);
+        })
+        .catch(err => {
+            if(err.response.status == 400){
+                const errorMessage = err.response.data.errors.map(error => error.msg).join(' ');
+                console.log("Bad request", errorMessage);
+            }
+            console.log("Error", err.response);
+        });
+}
+
+window.testAPI = testApi;

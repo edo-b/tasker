@@ -27,12 +27,12 @@ class EditFormModal extends Component {
 
     handleSubmit(e){
         e.preventDefault();
-        if(this.state.project && this.state.project.name !== ''){
-            closeEditFormModal();
-            editProject(this.state.project);
+        if(!this.state.project || !this.state.project.name || this.state.project.name.trim() === ''){
+            this.setState({displayErrorMessage: true, errorMessage: 'Name is required!'});
         }
         else{
-            this.setState({displayErrorMessage: true, errorMessage: 'Name is required!'});
+            closeEditFormModal();
+            editProject(this.state.project);
         }
     }
 

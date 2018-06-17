@@ -56,7 +56,26 @@ export function editProject (project) {
 }
 
 export function deleteProject(id){
-    dispatcher.dispatch({type: 'DELETE_PROJECT', data: {id: id}});
+    showSpinner();
+    axios.delete(`project/${id}`)
+        .then(response => {
+            if(response.data.status === 0){
+                dispatcher.dispatch({type: 'DELETE_PROJECT', data: {id: id}});
+                
+                showFeedbackMessage(0, 'Project deleted successfully');
+                hideSpinner();
+            }
+        })
+        .catch(err => {
+            if(err.response.status === 404){
+                showFeedbackMessage('orange', 'Project not found');
+                hideSpinner();
+            }
+            else{
+                showFeedbackMessage('red', 'An error occured!');
+                hideSpinner();
+            }
+        });
 }
 
 export function showDeleteModal(project){

@@ -109,6 +109,29 @@ exports.put_instance = [
         }
 }];
 
+exports.delete_instance = (req, res, next) => {
+    models.Project.findById(req.params.id)
+        .then(project => {
+            if(!project){
+                res.status(404);
+                res.json({ status: 1, message: "Not found" });
+            }
+            else {
+                project.destroy()
+                    .then(result => {
+                        res.json({ status: 0, message: "Project deleted successfully", project: project });
+                    })
+                    .catch(err => {
+                        res.json({status: 2, error: err});
+                    });
+            }
+        })
+        .catch(err => {
+            res.status(500);
+            res.json({status: 2, error: err});
+        });
+};
+
 // exports.get_instance = function(req, res, next){
 //     const projectInstances = [
 //         {

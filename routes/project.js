@@ -10,4 +10,6 @@ router.post('/', projectController.post_instance);
 
 router.put('/:id', projectController.put_instance);
 
+router.delete('/:id', projectController.delete_instance);
+
 module.exports = router;

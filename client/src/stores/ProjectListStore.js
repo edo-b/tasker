@@ -45,7 +45,6 @@ class ProjectListStore extends EventEmitter{
     }
 
     deleteProject(id){
-        console.log("Delete project", id);
         this.projects = this.projects.filter(it => {return it.id !== id});
         this.emit("change");
     }

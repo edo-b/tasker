@@ -85,7 +85,8 @@ class ProjectInstanceContainer extends Component {
                     </div>
                     <DeleteModal show={this.state.showDeleteModal} task={this.state.selectedTaskForModal} />
                     <EditFormModal show={this.state.showEditModal} task={this.state.selectedTaskForModal} />
-                    <CreateFormModal show={this.state.showCreateModal} status={this.state.selectedTaskStatus} />
+                    <CreateFormModal show={this.state.showCreateModal} status={this.state.selectedTaskStatus}
+                     projectId={(this.state.project && this.state.project.id) ? this.state.project.id : 0} />
                 </div>
             );
         }

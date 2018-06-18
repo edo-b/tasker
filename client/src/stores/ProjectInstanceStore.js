@@ -30,20 +30,20 @@ class ProjectInstanceStore extends EventEmitter {
         if(this.project && this.project.tasks){
             let projectTask = this.project.tasks.find(el => el.id === task.id)
             if(projectTask){
-                // Edit task on server
                 projectTask.title = task.title;
                 projectTask.color = task.color;
                 projectTask.description = task.description;
                 projectTask.status = task.status;
+
+                this.emit("change");                
             }
         }
     }
 
     createTask(task){
         if(this.project){
-            // Send new task on server (fire spinner)
             let newTask = {
-                id: Date.now(),
+                id: task.id,
                 title: task.title,
                 color: task.color,
                 description: task.description,
@@ -51,11 +51,13 @@ class ProjectInstanceStore extends EventEmitter {
             }
             if(!this.project.tasks) this.project.tasks = [];
             this.project.tasks.push(newTask);
+            this.emit("change");
         }
     }
 
     deleteTask(id){
         this.project.tasks = this.project.tasks.filter(it => {return it.id !== id});
+        this.emit("change");
     }
     
     handleActions(action){

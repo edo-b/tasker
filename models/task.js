@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
 
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+
     color: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -26,7 +31,6 @@ module.exports = (sequelize, DataTypes) => {
 
   Task.associate = function (models) {
     models.Task.belongsTo(models.Project, {
-      onDelete: "CASCADE",
       foreignKey: {
         allowNull: false
       }

@@ -3,8 +3,6 @@ import axios from 'axios';
 import dispatcher from '../dispatcher';
 import { showSpinner, hideSpinner, showFeedbackMessage } from '../actions/UIActions';
 
-// Later on handle api calls to server here
-
 export function createProject (name, color) {
     showSpinner();
     axios.post('project', { name: name, color: color })
@@ -101,20 +99,3 @@ export function showCreateFormModal(){
 export function closeCreateFormModal(){
     dispatcher.dispatch({type: 'CLOSE_CREATE_FORM_MODAL'});
 }
-
-const testApi = () => {
-    axios.post('project', { name:"Test", color:"orange" })
-        .then(response => {
-            if(response.data.status === 0 && response.data.project)
-            console.log("Project created", response.data.project);
-        })
-        .catch(err => {
-            if(err.response.status == 400){
-                const errorMessage = err.response.data.errors.map(error => error.msg).join(' ');
-                console.log("Bad request", errorMessage);
-            }
-            console.log("Error", err.response);
-        });
-}
-
-window.testAPI = testApi;

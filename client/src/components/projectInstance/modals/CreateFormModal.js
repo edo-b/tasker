@@ -40,7 +40,7 @@ class CreateFormModal extends Component {
         e.preventDefault();
         if(this.state.task && this.state.task.title !== ''){
             closeCreateModal();
-            createTask(this.state.task);
+            createTask(this.state.task, this.props.projectId);
         }
         else{
             this.setState({displayErrorMessage: true, errorMessage: 'Name is required!'});

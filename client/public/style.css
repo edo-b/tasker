@@ -799,3 +799,136 @@ textarea{
 .color-option.orange:hover{
     background-color: #f8a13d;
 }
+
+/*--------------------------------------------------------------- Login form -------------------------------------------------------------------*/
+
+.login-card{
+    margin: auto;
+    height: 100%;
+    /* background-color: #f8f8f8; */
+    color: #404040;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+
+    text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+    .login-card{
+        width: 90%;
+    }
+}
+
+.login-card-header{
+    display: block;
+    width:100%;
+    height: 50px;
+
+    border-radius: 5px 5px 0 0;
+
+    /* background-color:#78ab78; */
+    color: #e5e5e5;
+    /* background-color: rgba(80, 136, 163, 0.4); */
+    background-color: rgba(100, 146, 163, 0.3);
+}
+
+.login-card-header-content{
+    padding-top:8px;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    font-size: 24px;
+}
+
+.pull-left{
+    float:left;
+}
+.pull-right{
+    float:right;
+}
+
+.back-icon{
+    cursor: pointer;
+}
+
+.login-card-body{
+    padding: 30px 60px;
+    margin:auto;
+}
+
+.login-form-row{
+    width: 100%;
+    margin: 20px 0;
+}
+
+.input{
+    padding:12px 16px;
+    width: 100%;
+    border: 2px solid #507482;
+    border-radius:25px;
+    line-height: 18px;
+    font-size: 16px;
+    margin:5px 0;
+    color:#e5e5e5;
+    background-color: transparent;
+}
+
+.input:focus{
+    outline:0;
+}
+
+.input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #cecece;
+    opacity: 1; /* Firefox */
+}
+
+.input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #cecece;
+}
+
+.input::-ms-input-placeholder { /* Microsoft Edge */
+    color: #cecece;
+}
+
+.login-button-visible{
+    background-color: transparent;
+    border: 2px solid #507482;
+    color:#e5e5e5;
+}
+
+.login-button-visible:hover{
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid #507482;
+    color:#e5e5e5;
+}
+
+.login-input{
+    padding:12px 16px;
+    border: 2px solid #507482;
+    border-radius:25px;
+    line-height: 18px;
+    font-size: 16px;
+    margin:5px 0;
+    color:#e5e5e5;
+    background-color: transparent;
+
+    transition: border-color 0.35s ease
+}
+
+.login-input:focus{
+    outline: none;
+    border-color:#849da7;
+}
+
+.login-input::placeholder {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.login-input:-ms-input-placeholder {
+   color: #a7a7a7;
+}
+
+.login-input::-ms-input-placeholder {
+   color: #a7a7a7;
+}

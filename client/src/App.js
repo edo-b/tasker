@@ -4,12 +4,27 @@ import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 import ProjectListContainer from './containers/ProjectListContainer';
 import ProjectInstanceContainer from './containers/ProjectInstanceContainer';
 import LoginContainer from './containers/LoginContainer';
+import RegisterContainer from './containers/RegisterContainer';
 import DummyComponent from './containers/DummyComponent';
 
 import SideMenu from './components/sideMenu/SideMenu';
 import PageNotFound from './components/PageNotFound';
 import Spinner from './components/Spinner';
 import FeedbackMessage from './components/FeedbackMessage';
+
+const checkAuth = () => {
+  return false;
+}
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={props => (
+    checkAuth() ? (
+      <Component {...props} />
+    ) : (
+        <Redirect to={{ pathname: '/login' }} />
+      )
+  )} />
+)
 
 class App extends Component {
   render() {
@@ -22,10 +37,11 @@ class App extends Component {
             <FeedbackMessage />
             <Switch>
               <Route path="/" render={() => (<Redirect to="/projects" />)} exact />
-              <Route path="/projects" component={ProjectListContainer} exact />
-              <Route path="/project/:id" component={ProjectInstanceContainer} exact />
+              <PrivateRoute path="/projects" component={ProjectListContainer} exact />
+              <PrivateRoute path="/project/:id" component={ProjectInstanceContainer} exact />
               <Route path="/login" component={LoginContainer} exact />
-              <Route path="/dummy" component={DummyComponent} exact />
+              <Route path="/register" component={RegisterContainer} exact />
+              <PrivateRoute exact path="/private" component={DummyComponent} />
               <Route path="*" component={PageNotFound} />
             </Switch>
           </div>

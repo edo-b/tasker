@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import Login from '../components/account/Login';
+import Register from '../components/account/Register';
 
-class LoginContainer extends Component{
+class RegisterContainer extends Component{
     constructor(){
         super();
     }
@@ -11,11 +11,11 @@ class LoginContainer extends Component{
         return(
             <div className="full-page-background">
                 <div className="full-page-centered-text">
-                    <Login />
+                    <Register />
                 </div>
             </div>
         );
     }
 }
 
-export default LoginContainer;
+export default RegisterContainer;

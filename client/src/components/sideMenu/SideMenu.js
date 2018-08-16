@@ -24,7 +24,7 @@ class SideMenu extends Component {
                 <img src={this.state.profileImageUrl} alt="Profile" className="profile-img" onClick={this.toggleLogoutMenu} />
                 <NavLink to="/projects" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-home"></i></NavLink>
                 <NavLink to="/login" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-map-marker"></i></NavLink>
-                <NavLink to="/dummy" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-calendar"></i></NavLink>
+                <NavLink to="/private" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-lock"></i></NavLink>
 
                 <FloatingLogoutMenu isOpen={this.state.isLogoutMenuOpen} />
             </div>

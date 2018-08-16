@@ -682,6 +682,8 @@ tr:nth-child(even){background-color: #f2f2f2}
 
     animation-name: zoom;
     animation-duration: 0.2s;
+
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .warning-header{
     display:inline;
@@ -891,14 +893,14 @@ textarea{
 }
 
 .login-button-visible{
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.3);
     border: 2px solid #507482;
     color:#e5e5e5;
 }
 
 .login-button-visible:hover{
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 2px solid #507482;
+    background-color: #507482;
+    border: 2px solid #4689a3;
     color:#e5e5e5;
 }
 
@@ -931,4 +933,12 @@ textarea{
 
 .login-input::-ms-input-placeholder {
    color: #a7a7a7;
+}
+
+.purple-link {
+    text-decoration: none;
+    color: #b9b9b9;
+}
+.purple-link:hover {
+    color: #a36492;
 }

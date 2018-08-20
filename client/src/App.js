@@ -13,7 +13,7 @@ import Spinner from './components/Spinner';
 import FeedbackMessage from './components/FeedbackMessage';
 
 const checkAuth = () => {
-  return false;
+  return true;
 }
 
 const PrivateRoute = ({ component: Component, ...rest }) => (

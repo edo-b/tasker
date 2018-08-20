@@ -21,7 +21,12 @@ class ProjectListStore extends EventEmitter{
             this.emit("change");
         })
         .catch(err =>{
-            showFeedbackMessage('red', 'An error occured');
+            if(err.response.status === 403){
+                showFeedbackMessage('red', 'Not authorized');
+            }
+            else{
+                showFeedbackMessage('red', 'An error occured');
+            }
             hideSpinner();
         });
     }

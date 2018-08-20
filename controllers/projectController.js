@@ -2,8 +2,9 @@ const { check, validationResult }   = require('express-validator/check');
 const { sanitizeBody }              = require('express-validator/filter');
 
 var models = require('../models');
+var { verifyToken } = require('../services/authService');
 
-exports.get_list = function (req, res, next){
+exports.get_list = [verifyToken, function (req, res, next){
     models.Project.findAll()
         .then(projectList => {
             res.send(JSON.stringify(projectList));
@@ -11,9 +12,9 @@ exports.get_list = function (req, res, next){
         .catch(err => {
             return next(err);
         });
-};
+}];
 
-exports.get_instance = function(req, res, next){
+exports.get_instance = [verifyToken, function(req, res, next){
     if(!req.params.id){
         res.status(401);
         res.send("You need to provide ID");
@@ -38,7 +39,7 @@ exports.get_instance = function(req, res, next){
             return next(err);
         });
     }
-};
+}];
 
 exports.post_instance = [
     check('name').trim().isLength({ min: 1 }).withMessage('Name is required!'),

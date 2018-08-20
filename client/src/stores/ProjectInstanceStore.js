@@ -18,6 +18,12 @@ class ProjectInstanceStore extends EventEmitter {
                 hideSpinner();
                 if(err.response.status == 404)
                     showFeedbackMessage("orange", "Project instance not found!");
+                else if(err.response.status === 403){
+                    showFeedbackMessage('red', 'Not authorized');
+                }
+                else{
+                    showFeedbackMessage('red', 'An error occured');
+                }
             })
         }
     }

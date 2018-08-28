@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import dispatcher from '../dispatcher';
 import { showSpinner, hideSpinner, showFeedbackMessage } from '../actions/UIActions';
+import { getToken, checkSession } from '../services/authService';
 
 class ProjectListStore extends EventEmitter{
     constructor(){
@@ -14,21 +15,27 @@ class ProjectListStore extends EventEmitter{
     }
 
     initStore(){
-        showSpinner()
-        axios.get('/project').then((response) => {
-            this.projects = response.data;
-            hideSpinner();
-            this.emit("change");
-        })
-        .catch(err =>{
-            if(err.response.status === 403){
-                showFeedbackMessage('red', 'Not authorized');
-            }
-            else{
-                showFeedbackMessage('red', 'An error occured');
-            }
-            hideSpinner();
-        });
+        if(checkSession()){
+            showSpinner()
+            const token = getToken();
+            axios.get('/project', { headers: { Authorization: "Bearer " + token } }).then((response) => {
+                this.projects = response.data;
+                hideSpinner();
+                this.emit("change");
+            })
+            .catch(err =>{
+                if(err.response.status === 403){
+                    showFeedbackMessage('red', 'Not authorized');
+                }
+                else{
+                    showFeedbackMessage('red', 'An error occured');
+                }
+                hideSpinner();
+            });
+        }
+        else{
+            showFeedbackMessage('red', "Not authorized!");
+        }
     }
 
     getAllProjects(){

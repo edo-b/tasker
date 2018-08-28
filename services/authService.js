@@ -10,26 +10,25 @@ exports.verifyToken = (req, res, next) => {
         res.status(403);
         res.send("Not authorized");
     }
-
-    const token = bearerHeader.split(' ')[1];
-    
-    jwt.verify(token, 'mysecret', (err, data) => {
-        if(err){
-            res.status(403);
-            res.send("Not authorized");
-        }
-        else{
-            console.log("Data", data);
-            if(data.user && data.user.id){
-                res.locals.id = data.user.id;
-                next();
-            }
-            else{
+    else{
+        const token = bearerHeader.split(' ')[1];
+        jwt.verify(token, 'mysecret', (err, data) => {
+            if(err){
                 res.status(403);
                 res.send("Not authorized");
             }
-        }
-    });
+            else{
+                if(data.user && data.user.id){
+                    res.locals.id = data.user.id;
+                    next();
+                }
+                else{
+                    res.status(403);
+                    res.send("Not authorized");
+                }
+            }
+        });
+    }
 }
 
 exports.generateSalt = function(){

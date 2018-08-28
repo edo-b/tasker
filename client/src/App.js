@@ -11,14 +11,11 @@ import SideMenu from './components/sideMenu/SideMenu';
 import PageNotFound from './components/PageNotFound';
 import Spinner from './components/Spinner';
 import FeedbackMessage from './components/FeedbackMessage';
-
-const checkAuth = () => {
-  return true;
-}
+import { checkSession } from './services/authService';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    checkAuth() ? (
+    checkSession() ? (
       <Component {...props} />
     ) : (
         <Redirect to={{ pathname: '/login' }} />

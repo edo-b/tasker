@@ -3,28 +3,35 @@ import axios from 'axios';
 
 import dispatcher from '../dispatcher';
 import { showSpinner, hideSpinner, showFeedbackMessage } from '../actions/UIActions';
+import { checkSession, getToken } from '../services/authService';
 
 class ProjectInstanceStore extends EventEmitter {
     initStore(id){
         if(id){
-            showSpinner();
-            axios.get(`project/${id}`)
-            .then(response => {
-                this.project = response.data;
-                hideSpinner();
-                this.emit("change");
-            })
-            .catch(err => {
-                hideSpinner();
-                if(err.response.status == 404)
-                    showFeedbackMessage("orange", "Project instance not found!");
-                else if(err.response.status === 403){
-                    showFeedbackMessage('red', 'Not authorized');
-                }
-                else{
-                    showFeedbackMessage('red', 'An error occured');
-                }
-            })
+            if(checkSession()){
+                showSpinner();
+                const token = getToken();
+                axios.get(`project/${id}`, { headers: { Authorization: "Bearer " + token } })
+                .then(response => {
+                    this.project = response.data;
+                    hideSpinner();
+                    this.emit("change");
+                })
+                .catch(err => {
+                    hideSpinner();
+                    if(err.response.status == 404)
+                        showFeedbackMessage("orange", "Project instance not found!");
+                    else if(err.response.status === 403){
+                        showFeedbackMessage('red', 'Not authorized');
+                    }
+                    else{
+                        showFeedbackMessage('red', 'An error occured');
+                    }
+                });
+            }
+            else {
+                showFeedbackMessage('red', 'Not authorized!');                
+            }
         }
     }
 

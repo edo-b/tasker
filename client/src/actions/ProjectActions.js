@@ -2,10 +2,18 @@ import axios from 'axios';
 
 import dispatcher from '../dispatcher';
 import { showSpinner, hideSpinner, showFeedbackMessage } from '../actions/UIActions';
+import { getToken, checkSession } from '../services/authService';
 
 export function createProject (name, color) {
-    showSpinner();
-    axios.post('project', { name: name, color: color })
+    if(checkSession){
+        showSpinner();
+        const token = getToken();
+        axios({
+            method: 'POST',
+            url: 'project',
+            data: { name: name, color: color },
+            headers: { Authorization: "Bearer " + token }
+        })
         .then(response => {
             if(response.data.status === 0 && response.data.project){
                 dispatcher.dispatch({type: 'CREATE_PROJECT', data: response.data.project });
@@ -19,16 +27,31 @@ export function createProject (name, color) {
                 showFeedbackMessage('orange', errorMessage);
                 hideSpinner();
             }
+            else if(err.response.status == 403){
+                showFeedbackMessage('red', 'Not authorized');
+                hideSpinner();
+            }
             else{
                 showFeedbackMessage('red', 'An error occured!');
                 hideSpinner();
             }
         });
+    }
+    else{
+        showFeedbackMessage('red', 'Not authorized');
+    }
 }
 
 export function editProject (project) {
-    showSpinner();
-    axios.put(`project/${project.id}`, { name: project.name, color: project.color })
+    if(checkSession()) {
+        showSpinner();
+        const token = getToken();
+        axios({
+            method: 'PUT',
+            url: `project/${project.id}`,
+            headers: { Authorization: "Bearer " + token },
+            data: { name: project.name, color: project.color }
+        })
         .then(response => {
             if(response.data.status === 0 && response.data.project){
                 dispatcher.dispatch({type: 'EDIT_PROJECT', data: response.data.project });
@@ -46,16 +69,31 @@ export function editProject (project) {
                 showFeedbackMessage('orange', 'Project not found');
                 hideSpinner();
             }
+            else if(err.response.status === 403){
+                showFeedbackMessage('red', 'Not authorized');
+                hideSpinner();
+            }
             else{
                 showFeedbackMessage('red', 'An error occured!');
                 hideSpinner();
             }
         });
+    }
+    else {
+        showFeedbackMessage('red', 'Not authorized');
+    }
+    
 }
 
 export function deleteProject(id){
-    showSpinner();
-    axios.delete(`project/${id}`)
+    if(checkSession()){
+        showSpinner();
+        const token = getToken();
+        axios({
+            method: 'DELETE',
+            url: `project/${id}`,
+            headers: { Authorization: "Bearer " + token }
+        })
         .then(response => {
             if(response.data.status === 0){
                 dispatcher.dispatch({type: 'DELETE_PROJECT', data: {id: id}});
@@ -69,11 +107,19 @@ export function deleteProject(id){
                 showFeedbackMessage('orange', 'Project not found');
                 hideSpinner();
             }
+            else if(err.response.status == 403){
+                showFeedbackMessage('red', 'Not authorized');
+                hideSpinner();
+            }
             else{
                 showFeedbackMessage('red', 'An error occured!');
                 hideSpinner();
             }
         });
+    }
+    else{
+        showFeedbackMessage('red', 'Not authorized');
+    }
 }
 
 export function showDeleteModal(project){

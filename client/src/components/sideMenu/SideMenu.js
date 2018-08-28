@@ -1,32 +1,61 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 import FloatingLogoutMenu from './FloatingLogoutMenu';
+import { checkSession, getUserData } from '../../services/authService';
 
 class SideMenu extends Component {
     constructor(props){
         super(props);
         this.state = {
-            profileImageUrl: "img_avatar.png",
-            isLogoutMenuOpen: false
+            isLogoutMenuOpen: false,
+            isUserLoggedIn: false,
+            firstName: '',
+            lastName: ''
         };
 
         this.toggleLogoutMenu = this.toggleLogoutMenu.bind(this);
     }
 
+    componentDidMount(){
+        const isUserLoggedIn = checkSession();
+        
+        if(isUserLoggedIn){
+            const userData = getUserData();
+            const firstName = userData.firstName;
+            const lastName = userData.lastName;
+    
+            this.setState({
+                isUserLoggedIn: true,
+                firstName: firstName,
+                lastName: lastName
+            });
+        }
+        else {
+            this.setState({
+                isUserLoggedIn: false,
+                firstName: '',
+                lastName: ''
+            });
+        }
+    }
+
     toggleLogoutMenu(){
-        this.setState({isLogoutMenuOpen: !this.state.isLogoutMenuOpen});
+        if(this.state.isUserLoggedIn){
+            this.setState({isLogoutMenuOpen: !this.state.isLogoutMenuOpen});
+        }
     }
 
     render(){
         return (
             <div className="sidenav">
-                <img src={this.state.profileImageUrl} alt="Profile" className="profile-img" onClick={this.toggleLogoutMenu} />
-                <NavLink to="/projects" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-home"></i></NavLink>
-                <NavLink to="/login" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-map-marker"></i></NavLink>
-                <NavLink to="/private" className="sidenav-link" activeClassName="selected" exact><i className="fa fa-lock"></i></NavLink>
+                <img src={this.state.isUserLoggedIn ? "img_avatar.png" : "pattern_grey.png"}
+                alt="Profile" className={["profile-img", this.state.isUserLoggedIn ? '' : 'disabled'].join(' ')} onClick={this.toggleLogoutMenu} />
 
-                <FloatingLogoutMenu isOpen={this.state.isLogoutMenuOpen} />
+                <NavLink to="/projects" className={["sidenav-link", this.state.isUserLoggedIn ? '' : 'disabled'].join(' ')} activeClassName="selected" exact><i className="fa fa-home"></i></NavLink>
+
+                <FloatingLogoutMenu isOpen={this.state.isLogoutMenuOpen} isUserLoggedIn={this.state.isUserLoggedIn} fullName={this.state.firstName + ' ' + this.state.lastName} />
             </div>
         );
     }

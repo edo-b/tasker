@@ -33,5 +33,44 @@ exports.login = (req, res, next) => {
 };
 
 exports.register = [(req, res, next) => {
-    
+    if(!req.body.userName || !req.body.password || !req.body.firstName || !req.body.lastName){
+        res.status(400);
+        res.json({ code: 2, message: "Username, password, first name and last name are required" });
+    }
+    else {
+        models.User.findOne({
+            where: {
+                userName: req.body.userName
+            }
+        })
+        .then(user => {
+            if(user){
+                res.status(400);
+                res.json({ code: 2, message: "Username is already in use" });
+            }
+            else{
+                const salt = authService.generateSalt();
+                const passwordHash = authService.saltHashPassword(req.body.password, salt);
+                
+                models.User.create({
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    userName: req.body.userName,
+                    passwordHash: passwordHash,
+                    salt: salt
+                })
+                .then(user => {
+                    const token = jwt.sign({ user: user }, 'mysecret');
+                    res.json({ token: token });
+                })
+                .catch(err => {
+                    res.status(500);
+                    res.send({status: 1, error: err});
+                });
+            }
+        })
+        .catch(err => {
+            return next(err);
+        });
+    }
 }];

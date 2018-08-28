@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 
+import { terminateSession } from '../../services/authService';
+
 class FloatingLogoutMenu extends Component {
     render(){
         return(
-            <div className={["profile-actions", this.props.isOpen ? '' : 'hidden'].join(' ')} >
+            <div className={["profile-actions", this.props.isOpen && this.props.isUserLoggedIn ? '' : 'hidden'].join(' ')} >
                 <div className="profile-actions-content">
-                    <a href="#home" className="profile-actions-link"><i className="fa fa-info-circle"></i> John Doe</a>
-                    <a href="main.html" className="profile-actions-link logout-link">
+                    <a className="profile-actions-link"><i className="fa fa-info-circle"></i> {this.props.fullName}</a>
+                    <a className="profile-actions-link logout-link pointer" onClick={terminateSession}>
                         <i className="fa fa-sign-out"></i> Logout
                     </a>
                 </div>
